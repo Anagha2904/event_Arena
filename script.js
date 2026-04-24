@@ -410,12 +410,12 @@ function buildMongoDocuments(rows) {
         <article class="mongo-doc-card">
           <div class="mongo-doc-head">
             <strong>Document ${index + 1}</strong>
-            <span class="tag">${escapeHtml(String(row._id || "no-id"))}</span>
+            <span class="tag">Protected View</span>
           </div>
           ${buildMongoFields(row)}
           <details class="mongo-json-toggle">
             <summary>View full JSON</summary>
-            <pre>${escapeHtml(JSON.stringify(row, null, 2))}</pre>
+            <pre>${escapeHtml(JSON.stringify(sanitizeMongoDocument(row), null, 2))}</pre>
           </details>
         </article>
       `).join("")}
@@ -424,9 +424,10 @@ function buildMongoDocuments(rows) {
 }
 
 function buildMongoFields(document) {
+  const visibleEntries = Object.entries(sanitizeMongoDocument(document));
   return `
     <div class="mongo-field-list">
-      ${Object.entries(document).map(([key, value]) => `
+      ${visibleEntries.map(([key, value]) => `
         <div class="mongo-field-row">
           <span class="mongo-field-key">${escapeHtml(key)}</span>
           <span class="mongo-field-value">${formatMongoValue(value)}</span>
@@ -434,6 +435,13 @@ function buildMongoFields(document) {
       `).join("")}
     </div>
   `;
+}
+
+function sanitizeMongoDocument(document) {
+  const hiddenKeys = new Set(["_id", "password_hash", "token", "session_token"]);
+  return Object.fromEntries(
+    Object.entries(document).filter(([key]) => !hiddenKeys.has(key))
+  );
 }
 
 function formatMongoValue(value) {
@@ -528,18 +536,22 @@ function renderAdminEvents(events) {
     `;
 
     const actions = card.querySelector(".event-card-actions");
-    actions.appendChild(buildActionButton(event.locked ? "Unlock Event" : "Lock Event", async () => {
+    const actionRow = document.createElement("div");
+    actionRow.className = "admin-action-row";
+
+    actionRow.appendChild(buildActionButton(event.locked ? "Unlock Event" : "Lock Event", async () => {
       await api(`/api/admin/events/${event.id}/toggle-lock`, "POST");
       await loadAdminDashboard();
     }));
-    actions.appendChild(buildActionButton("Reset Scores", async () => {
+    actionRow.appendChild(buildActionButton("Reset Scores", async () => {
       await api(`/api/admin/events/${event.id}/reset`, "POST");
       await loadAdminDashboard();
     }, true));
-    actions.appendChild(buildActionButton("Edit Structure", () => {
+    actionRow.appendChild(buildActionButton("Edit Structure", () => {
       loadEventIntoBuilder(event);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, true));
+    actions.appendChild(actionRow);
 
     const roundControls = document.createElement("div");
     roundControls.className = "round-lock-list";

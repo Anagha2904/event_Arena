@@ -150,11 +150,18 @@ h1 {
 .switch-btn,
 .primary-btn,
 .ghost-btn {
-  border: 0;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
   padding: 12px 18px;
+  border: 1px solid transparent;
+  border-radius: 999px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .switch-btn {
@@ -165,24 +172,34 @@ h1 {
 .switch-btn.active {
   background: var(--accent);
   color: #042317;
-  font-weight: 700;
+  box-shadow: 0 12px 28px rgba(54, 226, 161, 0.25);
 }
 
 .primary-btn {
   background: linear-gradient(135deg, var(--accent), #86ffd2);
   color: #042317;
-  font-weight: 700;
+  border-color: rgba(134, 255, 210, 0.45);
 }
 
 .ghost-btn {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.07);
   color: var(--text);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .switch-btn:hover,
 .primary-btn:hover,
 .ghost-btn:hover {
   transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
+}
+
+.switch-btn:focus-visible,
+.primary-btn:focus-visible,
+.ghost-btn:focus-visible {
+  outline: none;
+  border-color: rgba(134, 255, 210, 0.7);
+  box-shadow: 0 0 0 3px rgba(54, 226, 161, 0.16), 0 16px 36px rgba(0, 0, 0, 0.28);
 }
 
 .flash-message {
@@ -486,6 +503,23 @@ code {
   gap: 10px;
 }
 
+.admin-action-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-action-row .primary-btn,
+.admin-action-row .ghost-btn,
+.round-lock-item .primary-btn,
+.round-lock-item .ghost-btn,
+.form-actions .primary-btn,
+.form-actions .ghost-btn,
+.builder-actions .ghost-btn,
+.builder-toolbar .ghost-btn {
+  min-width: 146px;
+}
+
 .builder-toolbar,
 .builder-title-row,
 .builder-actions {
@@ -513,6 +547,11 @@ code {
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.round-lock-item span {
+  flex: 1 1 220px;
+  color: var(--text);
 }
 
 .db-table-wrap {
