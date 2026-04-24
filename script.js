@@ -334,7 +334,9 @@ function showAuth() {
 function showApp() {
   elements.authShell.classList.add("hidden");
   elements.appShell.classList.remove("hidden");
-  elements.userSummary.textContent = `${currentUser.name} (${currentUser.email})`;
+  elements.userSummary.textContent = currentUser.role === "admin"
+    ? "Admin dashboard"
+    : `${currentUser.name} team dashboard`;
   elements.userRoleBadge.textContent = currentUser.role.toUpperCase();
   elements.adminView.classList.toggle("hidden", currentUser.role !== "admin");
   elements.studentView.classList.toggle("hidden", currentUser.role !== "student");

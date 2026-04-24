@@ -137,6 +137,18 @@ h1 {
   color: var(--text);
 }
 
+.event-card-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.event-card-meta .chip {
+  margin: 0;
+}
+
 .switcher {
   display: inline-flex;
   gap: 12px;
