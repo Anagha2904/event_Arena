@@ -1,105 +1,221 @@
-# Auto Event Arena
+# 🔱 Auto Event Arena
 
-Auto Event Arena is a full-stack event platform for coding and round-based competitions with admin and student dashboards, MongoDB-backed storage, dynamic event setup, automatic scoring, and support for solo and team events.
+Auto Event Arena is a full-stack event platform designed for conducting coding and round-based competitions with powerful admin and student dashboards. It supports dynamic event creation, multiple round types, automatic evaluation, and structured progression for both solo and team-based events.
 
-## Highlights
+---
 
-- Admin dashboard for event creation, round management, question management, locking, leaderboard tracking, and MongoDB inspection
-- Student dashboard for joining events, attempting rounds, viewing live ranking, and using the built-in compiler preview
-- Supported round types: MCQ, single-line answer, multi-line answer, coding, and debugging
-- Team-event progression rules so only the next round in sequence can be attempted by the team
-- MongoDB backend using `mongodb://localhost:27017/event`
-- VS Code-ready project setup with launch configuration
+## 🚀 Features
 
-## Tech Stack
+### 👨‍💼 Admin Dashboard
 
-- Frontend: HTML, CSS, JavaScript
-- Backend: Node.js
-- Database: MongoDB
+* Create and manage events
+* Add and configure multiple rounds
+* Add and manage questions
+* Lock/unlock rounds
+* Monitor participants
+* View live leaderboard
+* Inspect MongoDB collections directly
 
-## Run In VS Code
+---
 
-1. Open this folder in VS Code.
-2. Open the integrated terminal.
-3. Install dependencies:
+### 🎓 Student Dashboard
 
-```powershell
+* Join events using event code
+* Attempt rounds based on progression rules
+* View real-time leaderboard
+* Access built-in compiler preview for coding rounds
+
+---
+
+### 🧠 Supported Round Types
+
+* MCQ (Multiple Choice Questions)
+* Single-line Answer
+* Multi-line Answer
+* Coding
+* Debugging
+
+---
+
+### 👥 Team Event Logic
+
+* Sequential round progression
+* Only one team member can attempt a round at a time
+* Once a round is completed, other team members cannot reattempt it
+* Next round unlocks automatically for the team
+
+---
+
+## 🛠 Tech Stack
+
+* **Frontend:** HTML, CSS, JavaScript
+* **Backend:** Node.js
+* **Database:** MongoDB
+
+---
+
+## ⚙️ Setup & Run Locally
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/Anagha2904/event_Arena.git
+cd event_Arena
+```
+
+---
+
+### 2️⃣ Install dependencies
+
+```bash
 npm install
 ```
 
-4. Start the server:
+---
 
-```powershell
-npm start
-```
+### 3️⃣ Configure Environment Variables
 
-5. Open:
-
-[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
-You can also run it from the VS Code Run and Debug panel with:
-
-- `Run Auto Event Arena`
-
-## MongoDB Setup
-
-The app currently uses:
+Create a `.env` file in the root folder and add:
 
 ```env
 MONGO_URI=mongodb://localhost:27017/event
+PORT=8000
 ```
 
-You can inspect the same database in MongoDB Compass with:
+---
 
-```text
+### 4️⃣ Start the server
+
+```bash
+npm start
+```
+
+---
+
+### 5️⃣ Open in browser
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## 🗄 MongoDB Setup
+
+The application uses MongoDB for storing:
+
+* users
+* events
+* participants
+* attempts
+* sessions
+
+You can inspect the database using **MongoDB Compass**:
+
+```
 mongodb://localhost:27017/event
 ```
 
-## Default Admin Login
+---
 
-- Email: `admin@arena.com`
-- Password: `admin123`
+## 🔐 Admin Access
 
-## Project Structure
+Admin credentials are **not publicly shared** for security reasons.
 
-- `index.html` - main UI
-- `styles.css` - styling
-- `script.js` - frontend logic
-- `server.js` - backend server and MongoDB integration
-- `package.json` - scripts and dependencies
-- `.vscode/launch.json` - VS Code run configuration
+👉 The admin account must be created manually:
 
-## Built-In Mongo Inspector
+* Either directly in the database
+* Or through backend configuration
 
-The admin dashboard includes a MongoDB viewer for:
+---
 
-- users
-- events
-- participants
-- participant members
-- attempts
-- sessions
+## ⚠️ Security Note
 
-## Recommended GitHub Upload Files
+* Do NOT expose admin credentials in public repositories
+* Always store secrets inside `.env`
+* Ensure `.env` is added in `.gitignore`
+* Change default credentials before deployment
 
-- `index.html`
-- `styles.css`
-- `script.js`
-- `server.js`
-- `package.json`
-- `package-lock.json`
-- `README.md`
-- `LICENSE`
-- `.gitignore`
-- `.env.example`
-- `.vscode/launch.json`
+---
 
-Do not upload:
+## 📁 Project Structure
 
-- `node_modules/`
-- local secrets in `.env`
-- temporary local-only files
+```
+├── index.html
+├── styles.css
+├── script.js
+├── server.js
+├── package.json
+├── package-lock.json
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .env.example
+├── .vscode/
+```
 
-## License
+---
+
+## 📦 Recommended Files for Deployment
+
+✔ index.html
+✔ styles.css
+✔ script.js
+✔ server.js
+✔ package.json
+✔ package-lock.json
+✔ README.md
+✔ LICENSE
+✔ .gitignore
+
+---
+
+## ❌ Do NOT Upload
+
+* node_modules/
+* .env file
+* Any sensitive credentials
+
+---
+
+## 🌍 Deployment
+
+You can deploy this project using:
+
+* **Render**
+* **Railway**
+* **Vercel (frontend only)**
+
+Make sure to:
+
+* Set environment variables
+* Use MongoDB Atlas for production
+
+---
+
+## 📌 Future Improvements
+
+* AI-based proctoring system
+* Real-time WebSocket leaderboard
+* Anti-cheat mechanisms
+* Role-based authentication
+* Email verification system
+
+---
+
+## 📜 License
 
 This project is licensed under the MIT License.
+
+---
+
+## ✨ Author
+
+**Anagha C**
+GitHub: https://github.com/Anagha2904
+
+---
+
+## 🔥 Tagline
+
+> *"Compete. Code. Conquer."*
