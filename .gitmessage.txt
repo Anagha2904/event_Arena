@@ -1,0 +1,17 @@
+feat: initial Auto Event Arena setup
+
+Summary:
+- add MongoDB-backed backend
+- add admin and student dashboards
+- add round and question management
+
+Details:
+- 
+- 
+-
+
+Testing:
+- [ ] npm start
+- [ ] login works
+- [ ] admin event creation works
+- [ ] student event flow works

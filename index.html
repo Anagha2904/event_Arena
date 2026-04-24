@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Event Arena</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="auth-shell" class="auth-shell">
+    <section class="auth-hero">
+      <p class="eyebrow">Automatic Competition Platform</p>
+      <h1>Auto Event Arena</h1>
+      <p class="hero-copy">
+        Login-based event software with admin and student dashboards, automatic scoring,
+        4 rounds, a coding compiler flow, fullscreen round mode, and live leaderboards.
+      </p>
+    </section>
+
+    <section class="auth-card">
+      <div class="switcher">
+        <button class="switch-btn active" data-auth-target="login-pane">Login</button>
+        <button class="switch-btn" data-auth-target="register-pane">Register</button>
+      </div>
+
+      <div id="flash-message" class="flash-message hidden"></div>
+
+      <form id="login-pane" class="auth-form active">
+        <label>
+          Email
+          <input id="login-email" type="email" placeholder="admin@arena.com" required>
+        </label>
+        <label>
+          Password
+          <input id="login-password" type="password" placeholder="Enter password" required>
+        </label>
+        <button type="submit" class="primary-btn">Login</button>
+      </form>
+
+      <form id="register-pane" class="auth-form">
+        <label>
+          Full Name
+          <input id="register-name" type="text" placeholder="Your name" required>
+        </label>
+        <label>
+          Email
+          <input id="register-email" type="email" placeholder="team@example.com" required>
+        </label>
+        <label>
+          Password
+          <input id="register-password" type="password" placeholder="Create password" required>
+        </label>
+        <label>
+          Role
+          <select id="register-role">
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+          </select>
+        </label>
+        <button type="submit" class="primary-btn">Create Account</button>
+      </form>
+    </section>
+  </div>
+
+  <div id="app-shell" class="shell hidden">
+    <header class="hero app-hero">
+      <div>
+        <p class="eyebrow">Automatic Competition Platform</p>
+        <h1>Auto Event Arena</h1>
+        <p id="user-summary" class="hero-copy">Loading your dashboard...</p>
+      </div>
+      <div class="hero-badge">
+        <span id="user-role-badge">Role</span>
+        <button id="logout-btn" class="ghost-btn">Logout</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section id="admin-view" class="dashboard hidden">
+        <div class="dashboard-grid">
+          <section class="panel panel-lg">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Admin Control</p>
+                <h2>Create Event</h2>
+              </div>
+              <span class="chip">Stored in MongoDB</span>
+            </div>
+
+            <form id="event-form" class="form-grid">
+              <label>
+                Event Name
+                <input id="event-name" type="text" placeholder="Hack Sprint 2026" required>
+              </label>
+
+              <label>
+                Event Mode
+                <select id="event-mode">
+                  <option value="solo">Solo Event</option>
+                  <option value="team">Team Event</option>
+                </select>
+              </label>
+
+              <label>
+                Shuffle Questions Per Student
+                <select id="shuffle-questions">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </label>
+
+              <label class="full">
+                Event Description
+                <textarea id="event-description" rows="3" placeholder="Round-based automatic coding and quiz contest"></textarea>
+              </label>
+
+              <div class="round-builder full">
+                <div class="section-title">
+                  <h3 id="builder-mode-title">Round Builder</h3>
+                  <p>Create and manage rounds and questions before saving the event.</p>
+                </div>
+                <div class="builder-toolbar">
+                  <button id="add-round-btn" type="button" class="ghost-btn">Add Round</button>
+                  <span id="builder-editing-chip" class="chip hidden">Editing Event</span>
+                </div>
+                <div id="round-builder-list" class="round-builder-list"></div>
+              </div>
+
+              <div class="form-actions full">
+                <button type="submit" id="save-event-btn" class="primary-btn">Create Event</button>
+                <button type="button" id="reset-demo" class="ghost-btn">Reset Builder</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Event Controls</p>
+                <h2>Manage Events</h2>
+              </div>
+            </div>
+            <div id="admin-events" class="stack"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Live Ranking</p>
+                <h2>Leaderboard</h2>
+              </div>
+            </div>
+            <div id="admin-leaderboard" class="leaderboard-table"></div>
+          </section>
+
+          <section class="panel full-width-panel">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Mongo Inspector</p>
+                <h2>MongoDB Collections</h2>
+              </div>
+              <button id="refresh-db-view" class="ghost-btn" type="button">Refresh Data</button>
+            </div>
+            <div id="admin-database-view" class="db-viewer"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="student-view" class="dashboard hidden">
+        <div class="dashboard-grid student-grid">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Student Access</p>
+                <h2>Join Event</h2>
+              </div>
+            </div>
+            <form id="student-form" class="form-grid">
+              <label>
+                Team Name
+                <input id="team-name" type="text" placeholder="Team Velocity" required>
+              </label>
+
+              <label>
+                Select Event
+                <select id="student-event-select" required></select>
+              </label>
+
+              <div class="form-actions full">
+                <button type="submit" class="primary-btn">Join Event</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel panel-lg">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Student Dashboard</p>
+                <h2 id="student-event-title">No Event Selected</h2>
+              </div>
+              <span id="student-team-chip" class="chip muted">Waiting for team</span>
+            </div>
+
+            <div id="student-home" class="stack">
+              <div class="empty-state">
+                <h3>Join an event to continue</h3>
+                <p>Your rounds, team information, and live scores will appear here after joining.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="panel-kicker">Live Ranking</p>
+                <h2>Student Leaderboard</h2>
+              </div>
+            </div>
+            <div id="student-leaderboard" class="leaderboard-table"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="round-screen" class="round-screen hidden" aria-hidden="true">
+    <div class="round-topbar">
+      <div>
+        <p id="round-label" class="panel-kicker">Round</p>
+        <h2 id="round-title">Round Title</h2>
+      </div>
+      <div class="round-meta">
+        <span id="round-team" class="chip">Team</span>
+        <span id="round-timer" class="timer">00:00</span>
+      </div>
+    </div>
+
+    <div class="warning-banner">
+      Fullscreen is requested when a round starts. Browsers cannot fully disable tab switching,
+      so this app warns and applies penalties if the page is hidden during a live round.
+    </div>
+
+    <form id="round-form" class="round-body"></form>
+
+    <div class="round-footer">
+      <button id="run-code-btn" class="ghost-btn hidden" type="button">Run Code</button>
+      <button id="submit-round" class="primary-btn">Submit Round</button>
+    </div>
+  </div>
+
+  <template id="event-card-template">
+    <article class="event-card">
+      <div class="event-card-head">
+        <div>
+          <h3 class="event-name"></h3>
+          <p class="event-desc"></p>
+        </div>
+        <span class="status-pill"></span>
+      </div>
+      <div class="event-card-meta"></div>
+      <div class="event-card-actions"></div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
