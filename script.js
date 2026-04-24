@@ -178,7 +178,7 @@ function init() {
   bindAuthSwitch();
   bindForms();
   renderRoundBuilder();
-  bootstrap();
+  showAuth();
 }
 
 function bindAuthSwitch() {
