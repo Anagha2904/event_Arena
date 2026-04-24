@@ -141,10 +141,11 @@ async function start() {
     }
   });
 
-  server.listen(8000, "127.0.0.1", () => {
-    console.log("Auto Event Arena running at http://127.0.0.1:8000");
-    console.log(`MongoDB URI: ${MONGO_URI}`);
-  });
+  const PORT = process.env.PORT || 8000;
+
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Auto Event Arena running on port ${PORT}`);
+});
 }
 
 async function ensureIndexes() {
