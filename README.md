@@ -98,7 +98,6 @@ npm start
 http://127.0.0.1:8000
 ```
 
----
 
 ## 🗄 MongoDB Setup
 
@@ -112,9 +111,7 @@ The application uses MongoDB for storing:
 
 You can inspect the database using **MongoDB Compass**:
 
-```
-mongodb://localhost:27017/event
-```
+
 
 ---
 
@@ -126,16 +123,6 @@ Admin credentials are **not publicly shared** for security reasons.
 
 * Either directly in the database
 * Or through backend configuration
-
----
-
-## ⚠️ Security Note
-
-* Do NOT expose admin credentials in public repositories
-* Always store secrets inside `.env`
-* Ensure `.env` is added in `.gitignore`
-* Change default credentials before deployment
-
 ---
 
 ## 📁 Project Structure
@@ -170,13 +157,7 @@ Admin credentials are **not publicly shared** for security reasons.
 
 ---
 
-## ❌ Do NOT Upload
 
-* node_modules/
-* .env file
-* Any sensitive credentials
-
----
 
 ## 🌍 Deployment
 
